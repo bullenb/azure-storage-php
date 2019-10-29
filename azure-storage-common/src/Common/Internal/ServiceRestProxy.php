@@ -99,16 +99,19 @@ class ServiceRestProxy extends RestProxy
     private static function createClient(array $options)
     {
         $verify = true;
+        
         //Disable SSL if proxy has been set, and set the proxy in the client.
         $proxy = getenv('HTTP_PROXY');
+        
         // For testing with Fiddler
         // $proxy = 'localhost:8888';
         // $verify = false;
-        if (!empty($proxy)) {
+        
+        if (isset($proxy)) {
             $options['proxy'] = $proxy;
         }
 
-        if (!empty($options['verify'])) {
+        if (isset($options['verify'])) {
             $verify = $options['verify'];
         }
 
